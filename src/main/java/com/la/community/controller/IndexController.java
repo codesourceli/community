@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 进入首页自动根据cookie登录
+ */
 @Controller
 public class IndexController {
 
