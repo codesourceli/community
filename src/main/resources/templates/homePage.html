@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="icon" type="image/x-icon" href="image/favicon.ico">
+    <script type="application/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="js/homePage.js"></script>
+</head>
+<body>
+<div th:insert="navigation :: nav"></div>
+
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <div class="container-fluid homeNav">
+                <ul class="nav nav-pills">
+                    <li id="a-question" role="presentation" class="active"><a href="javascript:void(0)">我的提问</a></li>
+                    <li id="a-message" role="presentation"><a href="javascript:void(0)">通知</a></li>
+                    <li id="a-collection" role="presentation"><a href="javascript:void(0)">我的收藏</a></li>
+                </ul>
+            </div>
+        <hr>
+            <!--我的问题-->
+            <div id="question">
+                <div class="media" th:each="questionDTOS:${paginationDTO.data}">
+                    <div class="media-left media-middle">
+                        <a href="/profile">
+                            <img class="indexImg" th:src="${questionDTOS.user.avatarUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <!-- 标题 -->
+                        <h4 class="media-heading" th:text="${questionDTOS.title}"></h4>
+                        <!-- 描述 -->
+                        <span class="text-desc">
+                            [[${questionDTOS.commentCount}]] 个回复 • [[${questionDTOS.likeCount}]] 次浏览 •
+                            <span th:text=" ${#dates.format(questionDTOS.getCreatTime(),'yyyy-MM-dd hh:mm:ss')}"></span> •
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"><a href="#" style="color: #999999">编辑</a></span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 通知 -->
+            <div id="message">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                <a href="#">
+                                    <img class="indexImg" src="https://avatars1.githubusercontent.com/u/53697930?v=4">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Middle aligned media</h4>
+                                ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--我的收藏-->
+            <div id="collection">
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                            <img class="indexImg" src="https://avatars1.githubusercontent.com/u/53697930?v=4">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Middle aligned media</h4>
+                        ...
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div class="row" id="row">
+                <div class="col-sm-6 col-md-12">
+                    <div class="thumbnail">
+                        <img src="https://avatars1.githubusercontent.com/u/53697930?v=4">
+                        <div class="caption">
+                            <h4>昵称：<span></span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">14</span>
+                    提问
+                </li><li class="list-group-item">
+                    <span class="badge">14</span>
+                   通知
+                </li><li class="list-group-item">
+                    <span class="badge">14</span>
+                    Cras justo odio
+                </li><li class="list-group-item">
+                    <span class="badge">14</span>
+                    Cras justo odio
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li th:if="${paginationDTO.showFirstPage}==true">
+                <a href="/profile" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li th:if="${paginationDTO.showPrevious}==true">
+                <a th:href="@{/profile(currentPage=${paginationDTO.currentPage}-1)}" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            </li>
+
+            <li th:each="pages:${paginationDTO.showPages}"><a th:href="@{/profile(currentPage=${pages})}" th:text="${pages}"></a></li>
+
+            <li th:if="${paginationDTO.showNext}==true">
+                <a th:href="@{/profile(currentPage=${paginationDTO.currentPage}+1)}" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            </li>
+
+            <li th:if="${paginationDTO.showEndPage}==true">
+                <a th:href="@{/profile(currentPage=${paginationDTO.totalPage})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+</div>
+
+</body>
+</html>
+

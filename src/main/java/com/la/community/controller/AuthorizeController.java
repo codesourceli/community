@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
+ * 13128765072
  * 登录
  */
 @Controller
@@ -39,7 +40,6 @@ public class AuthorizeController {
 
     @GetMapping("callback")
     public String callback(String code, String state, HttpServletRequest request, HttpServletResponse response){
-        System.out.println("cookie");
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(client_id);
         accessTokenDTO.setClient_secret(client_secret);
@@ -55,6 +55,7 @@ public class AuthorizeController {
                 request.getSession().setAttribute("user",user);
                 //存入cookie
                 Cookie cookie = new Cookie("token", user.getAccountId());
+                cookie.setMaxAge(604800000);
                 response.addCookie(cookie);
                 return "redirect:/";
             }
@@ -63,8 +64,11 @@ public class AuthorizeController {
             user.setAccountId(githubUser.getId());
             user.setCreatTime(System.currentTimeMillis());
             user.setModifyTime(user.getCreatTime());
+            user.setAvatarUrl(githubUser.getAvatar_url());
             int result = userService.insert(user);
-            System.out.println(result);
+            Cookie cookie = new Cookie("token", user.getAccountId());
+            cookie.setMaxAge(604800000);
+            response.addCookie(cookie);
             request.getSession().setAttribute("user",user);
             return "redirect:/";
         }else{

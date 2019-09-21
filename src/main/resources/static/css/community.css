@@ -1,11 +1,34 @@
 .main{
     margin: 30px;
+    background-color: white;
 }
 body{
-    /*background-image: url("../image/bg.jpg");*/
-    background-color: #EFEFEF;
+    background-image: url("../image/bg.jpg");
+    /*background-color: #EFEFEF;*/
 }
+
 .btn-publish{
     float: right;
     margin-bottom: 15px;
+}
+
+.text-desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+.indexImg{
+    width: 30px;
+    height: 30px;
+}
+.homePageImg{
+    width: 250px;
+    height: 250px;
+}
+.homeNav{
+    margin-top: 20px;
+}
+#row{
+    margin-top: 15px;
 }
