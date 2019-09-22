@@ -14,5 +14,5 @@ public interface IQuestionService {
 
     PaginationDTO getQuestions(User user,PaginationDTO paginationDTOParam);
 
-    QuestionDTO getQuestions(Integer id);
+    QuestionDTO getQuestionById(Integer id);
 }

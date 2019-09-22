@@ -145,7 +145,7 @@ public class QuestionServiceImpl implements IQuestionService {
      * @return
      */
     @Override
-    public QuestionDTO getQuestions(Integer id) {
+    public QuestionDTO getQuestionById(Integer id) {
         Question question = new Question();
         question.setId(id);
         question=questionMapper.selectOne(question);
